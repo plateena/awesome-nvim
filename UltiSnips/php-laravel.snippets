@@ -1,0 +1,387 @@
+priority 1
+
+#resource controller
+snippet l_rsc "Laravel resource controller" b
+<?php
+
+class `!v expand('%:t:r')` extends ${1:BaseController} {
+    function __construct() {
+    }
+    
+    public function index() {
+    }
+    
+    public function create() {
+    }
+    
+    public function store() {
+    }
+    
+    public function show($id) {
+    }
+    
+    public function edit($id) {
+    }
+    
+    public function update($id) {
+    }
+    
+    public function destroy($id) {
+    }
+}
+endsnippet
+
+#requests
+snippet l_rc "Laravel request" b
+<?php
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class ${1:`!v expand('%:t:r')`} extends FormRequest {
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+			${0}
+        ];
+    }
+}
+endsnippet
+
+#service service provider
+snippet l_ssp "Laravel service provider for service" b
+<?php
+
+namespace ${1:Services};
+
+use Illuminate\Support\ServiceProvider;
+
+class ${2:`!v expand('%:t:r')`} extends ServiceProvider {
+    
+    public function register() {
+        $this->app->bind('$4Service', function ($app) {
+            return new $5(
+                $app->make('Repositories\\$6Interface')
+            );
+        });
+    }
+}
+endsnippet
+
+#repository service provider
+snippet l_rsp "Laravel service provider for repository" b
+<?php
+
+namespace ${2:Repositories\\${1:}};
+
+use Entities\\$1;
+use $2\\$1Repository;
+use Illuminate\Support\ServiceProvider;
+
+class ${3:`!v expand('%:t:r')`} extends ServiceProvider {
+    /*!
+     * \var     defer
+     * \brief   Defer service
+     */
+    protected $defer = ${5:true};
+
+    public function register() {
+        $this->app->bind('$2\\$1Interface', function($app) {
+            return new $1Repository(new $1());
+        });
+    }
+
+    /*!
+     * \brief   If $defer == true need this fn
+     */ 
+    public function provides() {
+        return ['$2\\$1Interface'];
+    }
+}
+endsnippet
+
+#model
+snippet l_md "Laravel simple model" b
+<?php
+
+namespace ${1:Models};
+
+use Illuminate\Database\Eloquent\Model;
+
+class ${2:`!v expand('%:t:r')`} extends Model {
+    protected $table   = '${3:`!p snip.rv = t[2].lower()`}';
+
+    protected $guarded = [${4:'id'}];
+
+	${0}
+}
+endsnippet
+
+#abstract repository
+snippet l_ar "Laravel abstract Repository" b
+<?php
+
+namespace ${1:Repositories};
+
+use Illuminate\Database\Eloquent\Model;
+
+abstract class ${2:`!v expand('%:t:r')`} implements ${3:BaseRepositoryInterface} {
+    protected $model;
+
+    /*!
+     * \fn      __construct
+     *
+     * \brief   Take the model
+     */
+
+    public function __construct(Model $model) {
+        $this->model = $model;
+    }
+
+    /*!
+     * \fn      all
+     *
+     * \return  Illuminate\Database\Eloquent\Collection
+     */
+    public function all($columns = ['*']) {
+        return $this->model->all()->toArray();
+    }
+
+    /*!
+     * \fn      create
+     *
+     * \return  Illuminate\Database\Eloquent\Model
+     */
+    public function create(array $attributes) {
+        return $this->model->create($attributes);
+    }
+
+    /*!
+     * \fn      destroy
+     *
+     * \return  int
+     */
+    public function destroy($ids) {
+        return $this->model->destroy($ids);
+    }
+
+    /*!
+     * \fn      find
+     *
+     * \return  mixed
+     */
+    public function find($id, $columns = ['*']) {
+        return $this->model->find($id, $columns);
+    }
+}
+endsnippet
+
+#repository
+snippet l_r "Laravel Repository" b
+<?php
+
+namespace App\Repositories;
+
+use Plateena\BasicKit\Repository\BaseRepository;
+use Spatie\QueryBuilder\QueryBuilder;
+
+class `!v expand('%:t:r')` extends BaseRepository {
+    /**
+     * @param $1 $model
+     */
+    public function __construct(${1:Model} $model)
+    {
+        $this->model = $model;
+    }
+
+    public function baseQuery() : QueryBuilder
+    {
+        return QueryBuilder::for($this->model);
+    }
+
+    public function listQuery()
+    {
+         return $this->baseQuery();
+
+    }
+}
+endsnippet
+
+#service
+snippet l_s "Laravel Service" b
+<?php
+
+namespace Services\\$1;
+
+use ${3:Repositories\\${4:Interface}};
+
+class ${2:`!v expand('%:t:r')`} {
+    protected $${5:repo};
+    
+    /*!
+     * \fn      __construct
+     */
+    public function __construct($4 $repo) {
+        $this->$5 = $repo;
+    }
+}
+endsnippet
+
+#facade
+snippet l_f "Laravel Facade" b
+<?php
+
+namespace ${1:Services};
+
+use \Illuminate\Support\Facades\Facade;
+
+class ${2:`!v expand('%:t:r')`} extends Facade {
+    /*!
+     * \fn          getFacadeAccessor
+     *
+     * \return      string
+     */
+    protected static function getFacadeAccessor() { return '${4:$3Service}'; }
+}
+endsnippet
+
+snippet l_rsr "laravel resource class" b
+<?php
+
+namespace App\Http\Resources;
+
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class `!v expand('%:t:r')` extends JsonResource
+{
+    /**
+     * Transform the resource into an array.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    public function toArray($request)
+    {
+        return [
+            'id' => $this->id,
+			${0}
+        ];
+    }
+}
+endsnippet
+
+snippet l_fc "Create laravel factory" b
+<?php
+
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class `!v expand('%:t:r')` extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = ${1:Model}::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+			'${2:field}' => $this->faker->${3:word},
+        ];
+    }
+}
+endsnippet
+
+snippet l_mic "Create migration class" b
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class ${1:Create${2:Somthing}Table} extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('${3:table}', function (Blueprint $table) {
+            $table->id();
+			${0:// add your field}
+            $table->timestamps();
+            $table->softDeletes();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('$3');
+    }
+}
+endsnippet
+
+snippet l_repo "Create laravel repository" b
+<?php
+
+namespace Repositories;
+
+use Plateena\BasicKit\Repository\BaseRepository;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
+
+class `!v expand('%:t:r')` extends BaseRepository {
+
+    /**
+     * @param ${1:Model} $model
+     */
+    public function __construct($1 $model)
+    {
+        $this->model = $model;
+    }
+
+    public function baseQuery(): QueryBuilder
+    {
+        return QueryBuilder::for($this->model)->allowedIncludes([
+
+		]);
+    }
+
+    public function listQuery()
+    {
+        return $this->baseQuery()
+                    ->allowedFilters([
+                        AllowedFilter::exact('id'),
+                    ]);
+    }
+} // End class `!v expand('%:t:r')`
+endsnippet

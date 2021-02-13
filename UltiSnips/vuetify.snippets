@@ -1,0 +1,61 @@
+snippet vrow "create vuetify grid system"
+<v-row>
+	<v-col>
+		${0}
+	</v-col>
+</v-row>
+endsnippet
+	
+snippet vtf "create vuetify v-text-field"
+<v-text-field
+	v-model="${1}"
+	label="${2}"
+	placeholder="${3}"
+	hide-details="auto"
+	dense
+	outlined
+></v-text-field>
+endsnippet
+
+snippet vcol "create vuetify v-col"
+<v-col>
+	${0}
+</v-col>
+endsnippet
+
+snippet vbtn "create vuetify button"
+<v-btn>${0}</v-btn>
+endsnippet
+
+snippet vauto "create vuetify v-autocomplete"
+<v-autocomplete
+	v-model="${1}"
+	:items="${2}"
+	label="${3}"
+	placeholder="${4}"
+	hide-details="auto"
+	dense
+	outlined
+></v-autocomplete>
+endsnippet
+
+snippet vcard "create v-card"
+<v-card>
+${0}
+</v-card>
+endsnippet
+
+snippet vtable "datatable"
+<v-data-table>
+${1}
+</v-data-table>
+endsnippet
+
+snippet vslot "template slot"
+<template v-slot:${1}="{ ${2} }">
+	${VISUAL}${0}
+</template>
+endsnippet
+	
+
+

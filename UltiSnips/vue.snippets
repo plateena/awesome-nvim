@@ -1,0 +1,30 @@
+extends vuetify
+snippet template "create vue template"
+<template>
+    <div>
+		${0}
+    </div>
+</template>
+endsnippet
+
+snippet spinner "add spinner component" b
+<spinner v-if="pending"></spinner>
+endsnippet
+
+snippet axios "axios" b
+const formData = new FormData();
+axios
+	.post('${1}', formData, {
+		headers: {
+			'Content-Type': 'multipart/form-data',
+		},
+	})
+	.then(r => {
+		${0}
+	})
+	.catch(e => {})
+	.then(() => {
+		${2:this.pendings.${3} = false;}
+	});
+endsnippet
+

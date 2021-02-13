@@ -1,0 +1,102 @@
+priority 1
+extends php-laravel
+
+snippet exh "without exception handling"
+// @XXX: Debuggin the error
+$this->withoutExceptionHandling();
+endsnippet
+	
+snippet db_tran "db transaction"
+return DB::transaction(function() use (${1}) {
+	${0}
+});
+endsnippet
+	
+snippet try "controller try" b
+DB::beginTransaction();
+try {
+	${0}
+	DB::commit();
+} catch (Exception $e) {
+	DB::rollback();
+	return Response::json($e->getMessage(), 500);
+}
+endsnippet
+
+snippet fsummary "Create phpdoc file summary" b
+/**
+ * `!v GetFilePath()`
+ */
+endsnippet
+
+snippet dd "Create dump die"
+// @XXX: Dump die to debug
+dd(get_class($this),${0});
+endsnippet
+
+snippet todo "comment like todo"
+// @${1:TODO}:  <`!v strftime("%Y")`-`!v strftime("%m")`-`!v strftime("%d")`, zainundin> ${0}
+endsnippet
+	
+snippet dump "Create dump "
+// @XXX: Dump for debug
+dump(get_class($this),${0});
+endsnippet
+
+snippet getContent "Create dump get response content"
+// @XXX: Dump for debug
+dump(get_class($this),$response->getContent());
+endsnippet
+
+snippet @t "test this function"
+/** @test */
+endsnippet
+	
+snippet pbf "create public function"
+public function ${1}(${2})
+{
+	${0}
+}
+endsnippet
+
+snippet prf "create protected function"
+protected function ${1}(${2})
+{
+	${0}
+}
+endsnippet
+
+snippet pvf "create private function"
+private function ${1}(${2})
+{
+	${0}
+}
+endsnippet
+
+snippet eql "description"
+\DB::enableQueryLog();
+endsnippet
+	
+snippet gql "description"
+\DB::getQueryLog()
+endsnippet
+	
+snippet => "object key value"
+'${1}' => ${0},
+endsnippet
+
+snippet cthead "Set a big title easy to look" b
+// =============================================================================
+// ${0:Description here}
+// =============================================================================
+endsnippet
+
+snippet cshead "Set a sub title easy to look" b
+// -----------------------------------------------------------------------------
+// ${0:Description here}
+// -----------------------------------------------------------------------------
+endsnippet
+
+snippet mark "Create marker to easily find" b
+// @MARK: ${0:Current Mark}
+endsnippet

@@ -1,0 +1,92 @@
+{
+    "resources/sass/*.scss": {
+        "type": "sass"
+    },
+    "app/Http/Controllers/*Controller.php": {
+        "alternate": "app/Repository/{}Repository.php"
+    },
+    "app/Http/Requests/*Request.php": {
+        "alternate": "app/Http/Controllers/{}Controller.php"
+    },
+    "app/Repository/*Repository.php": {
+        "alternate": "app/Http/Controllers/{}Controller.php"
+    },
+    "resources/js/components/pages/*.vue": {
+        "alternate": "resources/js/components/pages/{}.js",
+        "type": "vpage"
+    },
+    "src/*.vue": {
+        "alternate": "src/{}.js",
+        "type": "vpage"
+    },
+    "src/*.js": {
+        "alternate": "src/{}.vue",
+        "type": "vpage"
+    },
+    "app/Repository/*.php": {
+        "type": "repository"
+    },
+    "app/Services/*.php": {
+        "type": "services"
+    },
+    "resources/js/components/pages/*.js": {
+        "alternate": "resources/js/components/pages/{}.vue",
+        "type": "vpage"
+    },
+    "resources/js/helpers/*.js": {
+        "type": "vhelper"
+    },
+    "resources/js/mixins/*.js": {
+        "type": "mixins"
+    },
+    "resources/js/parts/*.vue": {
+        "alternate": "resources/js/parts/{}.js",
+        "type": "vpart"
+    },
+    "resources/js/parts/*.js": {
+        "alternate": "resources/js/parts/{}.vue",
+        "type": "vpart"
+    },
+    "resources/js/router/*.js": {
+        "type": "vrouter"
+    },
+    "src/Http/Controllers/*Controller.php": {
+        "type": "pcontroller"
+    },
+    "src/Http/Request/*Request.php": {
+        "type": "prequest"
+    },
+    "src/Http/Resources/*Resource.php": {
+        "type": "presource"
+    },
+    "src/Models/*.php": {
+        "type": "pmodel"
+    },
+    "src/Repositories/*Repository.php": {
+        "type": "prepository"
+    },
+    "src/Mail/*Mail.php": {
+        "type": "pmail"
+    },
+    "src/Notifications/*Notification.php": {
+        "type": "pnotification"
+    },
+    "src/Observer/*Observer.php": {
+        "type": "pobserver"
+    },
+    "src/Providers/*Provider.php": {
+        "type": "pprovider"
+    },
+    "src/Services/*Services.php": {
+        "type": "pservices"
+    },
+    "database/factories/*Factory.php": {
+        "type": "pfactory"
+    },
+    "database/migrations/*.php": {
+        "type": "pmigration"
+    },
+    "tests/*Test.php": {
+        "type": "ptest"
+    }
+}

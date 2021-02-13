@@ -1,0 +1,52 @@
+snippet console "create console log" b
+// @XXX: For the debugging
+console.log("${1:For}",${0});
+endsnippet
+
+snippet todo "Create todo comment"
+// @TODO: <`!v strftime("%Y")`-`!v strftime("%m")`-`!v strftime("%d")` | zainundin> ${0}
+endsnippet
+
+snippet ex "export default"
+export default {
+	${0}
+}
+endsnippet
+
+snippet axios "axios"
+axios
+	.${1:get}("${2}")
+	.then(r => {
+	${0}
+	})
+	.catch(e => {
+	})
+	.then(() => {
+	});
+endsnippet
+
+snippet data "creata data"
+data: function() {
+	return {
+		${0}
+	}
+},
+endsnippet
+
+snippet require "require for javascript"
+require(${0}).default,
+endsnippet
+	
+snippet mtd "Create vue method"
+methods: {
+	${0}
+}
+endsnippet
+
+snippet vf "vue methods"
+${1:funcNmae}(${2}) {
+	${0}
+}
+endsnippet
+	
+	
