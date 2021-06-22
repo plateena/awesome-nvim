@@ -1,0 +1,49 @@
+global !p
+from datetime import datetime, timedelta
+def fileTomorrow():
+	specific_date = datetime.strptime(snip.basename,"%Y-%m-%d")
+	new_date = specific_date + timedelta(days=1)
+	return new_date.strftime("%Y-%m-%d")
+endglobal
+
+global !p
+def fileDateFormat():
+	specific_date = datetime.strptime(snip.basename,"%Y-%m-%d")
+	return specific_date.strftime("%b %d, %a")
+endglobal
+
+snippet menu "create menu" b
+[Home](/index.md) | [Back](./index.md)
+endsnippet
+
+snippet home "create link to home wiki" b
+[Home](/index.md)
+endsnippet
+
+snippet back "Create back button"
+[Back](./index.md) 
+endsnippet
+
+snippet dt " Vimwiki diary template" b
+# `!p snip.rv = fileDateFormat()`: ${1:put title here}
+
+## Todo | entry.before:`!p snip.rv = fileTomorrow()` status:Pending or status:Start
+
+## Notes
+
+## Achieve | +COMPLETED end:`!v expand('%:t:r')`
+
+${0}
+endsnippet
+
+snippet sd "Create a small date" b
+#### `!v strftime('%b %d')`
+endsnippet
+
+snippet achieve "Print all finish task today" b
+## Achieve | +COMPLETED end:`!p snip.rv = snip.basename`
+endsnippet
+
+snippet test "Description" b
+`!p snip.rv = fileTomorrow()`
+endsnippet
