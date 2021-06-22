@@ -8,7 +8,7 @@ nmap k gk
 nmap <leader>w :w<Cr>
 
 " turn off search highlighting with <CR> (carriage-return)
-nnoremap <CR> :nohlsearch<CR><CR>
+nnoremap <leader><CR> :nohlsearch<CR><CR>
 
 nmap <leader>sv :so ~/.config/nvim/init.vim<Cr> 
 
@@ -30,3 +30,7 @@ nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 
 nnoremap gp :silent %!prettier --stdin-filepath %<CR>
+
+nmap <leader>cr :colorscheme random<Cr>
+
+" Command  mode mapping

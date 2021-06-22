@@ -1,3 +1,24 @@
+global !p
+def decoText(text, deco_text):
+
+	str_text = text.rstrip('\n')
+	wrap_len = 80
+	deco_len = (wrap_len - len(str_text)) // 2
+	start_len_deco = deco_len - 2
+	end_len_deco = wrap_len - len(str_text) - deco_len - 1
+
+	return (deco_text*start_len_deco + " " + str_text + " " + deco_text* end_len_deco)
+endglobal
+
 snippet path "Description" 
 `!v GetFilePath()`
 endsnippet
+
+snippet decotxt "Description" b
+${1}`!p snip.rv = decoText(snip.v.text,t[1])`
+endsnippet
+
+snippet "dct([.\-_\,@#%$~`a-zA-Z0-9 ])?" "Description" r
+`!p snip.rv = decoText(snip.v.text,match.group(1))`
+endsnippet
+

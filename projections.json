@@ -26,6 +26,9 @@
     "app/Repository/*.php": {
         "type": "repository"
     },
+    "app/Repositories/*.php": {
+        "type": "repositories"
+    },
     "app/Services/*.php": {
         "type": "services"
     },
@@ -46,6 +49,14 @@
     "resources/js/parts/*.js": {
         "alternate": "resources/js/parts/{}.vue",
         "type": "vpart"
+    },
+    "resources/js/partials/*.vue": {
+        "alternate": "resources/js/partials/{}.js",
+        "type": "vpartial"
+    },
+    "resources/js/partials/*.js": {
+        "alternate": "resources/js/partials/{}.vue",
+        "type": "vpartial"
     },
     "resources/js/router/*.js": {
         "type": "vrouter"
@@ -88,5 +99,8 @@
     },
     "tests/*Test.php": {
         "type": "ptest"
+    },
+    "resources/js/api/*.js": {
+        "type": "vapi"
     }
 }
